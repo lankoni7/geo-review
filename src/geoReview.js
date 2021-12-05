@@ -64,23 +64,27 @@ export default class GeoReview {
     if (e.target.tagName === "BUTTON") {
       const reviewForm = document.querySelector(".review");
       const coords = JSON.parse(reviewForm.dataset.coords);
+      const name = document.getElementById("input-name").value;
+      const place = document.getElementById("input-place").value;
+      const text = document.getElementById("input-text").value;
+      if (name && place && text) {
+        const data = {
+          coords: JSON.stringify(coords),
+          review: {
+            name: name,
+            place: place,
+            text: text,
+          },
+        };
 
-      const data = {
-        coords: JSON.stringify(coords),
-        review: {
-          name: document.getElementById("input-name").value,
-          place: document.getElementById("input-place").value,
-          text: document.getElementById("input-text").value,
-        },
-      };
-
-      try {
-        await this.callApi("add", data);
-        this.map.createPlacemark(coords);
-        this.map.closeBalloon();
-      } catch (error) {
-        const formError = document.querySelector(".form-error");
-        formError.innerText = error.message;
+        try {
+          await this.callApi("add", data);
+          this.map.createPlacemark(coords);
+          this.map.closeBalloon();
+        } catch (error) {
+          const formError = document.querySelector(".review-error");
+          formError.innerText = error.message;
+        }
       }
     }
   }

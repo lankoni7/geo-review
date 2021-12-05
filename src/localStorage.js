@@ -6,6 +6,7 @@ export default class LocalStorage {
   getCoords() {
     return JSON.parse(this.localStorage.getItem("coords")) || {};
   }
+
   async getList(coords) {
     let coordsObj = await this.getCoords();
     if (Object.keys(coordsObj).includes(coords)) {

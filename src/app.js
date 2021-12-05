@@ -1,5 +1,5 @@
 import "./index.html";
-import "./styles/main.scss";
+import "./styles/main.css";
 import GeoReview from "./geoReview";
 
 new GeoReview();
