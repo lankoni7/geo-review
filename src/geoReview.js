@@ -54,6 +54,7 @@ export default class GeoReview {
   }
 
   async onClick(coords) {
+    coords = coords.map((el) => parseFloat(el.toFixed(10)));
     this.map.openBalloon(coords, "Загрузка...");
     const list = await this.callApi("list", JSON.stringify(coords));
     const form = this.createForm(coords, list);

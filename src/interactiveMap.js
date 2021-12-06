@@ -32,15 +32,14 @@ export default class InteractiveMap {
     this.map.events.add("click", (e) => this.onClick(e.get("coords")));
 
     this.clusterer = new ymaps.Clusterer({
-      groupByCoordinates: true,
       clusterDisableClickZoom: true,
       clusterOpenBalloonOnClick: false,
-      maxZoom: 150,
     });
     this.clusterer.events.add("click", (e) => {
       const coords = e.get("target").geometry.getCoordinates();
       this.onClick(coords);
     });
+
     this.map.geoObjects.add(this.clusterer);
   }
 
